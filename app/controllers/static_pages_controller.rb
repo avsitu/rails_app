@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
   def home
     @msg = "message from controller"
+    @log_in_link = '#'
   end
 
   def help
