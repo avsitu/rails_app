@@ -1,7 +1,9 @@
 class StaticPagesController < ApplicationController
+  def index
+  end
+
   def home
-    @msg = "message from controller"
-    @log_in_link = '#'
+    @micropost = current_user.microposts.build if logged_in?
   end
 
   def help
