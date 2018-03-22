@@ -8,7 +8,7 @@
     <li>
       <div>
       <%= gravatar_for user, 50 %>
-      <%= link_to "#{user.name} - #{user.username}", user %>
+      <%= link_to "#{user.name} - #{user.username}", username_path(user.username) %>
       </div>
       <% if current_user.admin? && current_user != user %>
         <%= link_to "delete", user, class:"btn btn-danger", method: :delete, data: { confirm: "You sure?" } %>

@@ -4,14 +4,15 @@ class UsersController < ApplicationController
   before_action :admin_user, only: :destroy
 
   def index
-    @users = User.paginate(page: params[:page], per_page: 20)
+    @users = User.paginate(page: params[:page], per_page: 15)
   end  
 
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by_username(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
-    @micropost = current_user.microposts.build if logged_in?
+    # render post form if current user
+    @micropost = current_user.microposts.build if current_user == @user
   end 
 
   def new
@@ -23,7 +24,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = "Welcome to the Sample App #{@user.name}!"
-      redirect_to @user
+      redirect_to username_path(@user.username)
     else
       render 'new'
     end
@@ -37,7 +38,7 @@ class UsersController < ApplicationController
     # @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
-      redirect_to @user
+      redirect_to username_path(@user.username)
     else
       render 'edit'
     end
@@ -53,14 +54,14 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :username, :password, :password_confirmation)
-    end     
-
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_url) unless @user == current_user
-    end    
+    end         
 
     def admin_user
       redirect_to(root_url) unless current_user.admin?
     end
+
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless @user == current_user
+    end     
 end
