@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
 
   def show
-    @user = User.find_by_username(params[:id])
+    @user = User.find_by(username: params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
     # render post form if current user
     @micropost = current_user.microposts.build if current_user == @user

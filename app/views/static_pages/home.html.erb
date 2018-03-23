@@ -1,3 +1,5 @@
+<% provide(:title, "Home") %>
+
 <div class="jumbotron">
 <% if logged_in? %>
   <div class="row">
@@ -20,14 +22,18 @@
   </div>
 <% else %>
   <h1>Welcome to the Sample App</h1>
+  <div>
+    <span>This is a demonstration of web development using the 
+      <a href="http://rubyonrails.org/">Ruby on Rails</a> framework.</span>
+    <span>This app allows users to:</span>
+    <ul>
+      <li>Set up an account</li>
+      <li>Create short text posts that appear on their profiles</li>
+      <li>Follow other users to receive a feed of their posts</li>
+    </ul>
+  </div>
 
-  <h2>
-    This is the home page for the
-    <a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>
-    sample application.
-  </h2>
-  <div class = "center"><%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %></div>
-  <div class = "center pt-5"><%= link_to image_tag("rails.png", alt: "Rails logo"), 'http://rubyonrails.org/'%></div>
+  <div class = "center"><%= link_to "Sign Up for an Account Now!", signup_path, class: "btn btn-lg btn-primary" %></div>
 <% end %>
 
 
