@@ -12,21 +12,21 @@ class MicropostsController < ApplicationController
       flash[:success] = "Micropost created!"
       redirect_to request.referrer
     else
-      flash[:danger] = "Post cannot be blank."
+      flash[:danger] = @micropost.errors.full_messages[0]
       redirect_to request.referrer
     end
   end
 
-  def create_at_profile
-    @micropost = current_user.microposts.build(micropost_params)
-    if @micropost.save
-      flash[:success] = "Micropost created!"
-      redirect_to current_user
-    else
-      flash[:danger] = "Post cannot be blank."
-      redirect_to current_user
-    end
-  end
+  # def create_at_profile
+  #   @micropost = current_user.microposts.build(micropost_params)
+  #   if @micropost.save
+  #     flash[:success] = "Micropost created!"
+  #     redirect_to current_user
+  #   else
+  #     flash[:danger] = "Post cannot be blank."
+  #     redirect_to current_user
+  #   end
+  # end
 
   def destroy
     @micropost.destroy

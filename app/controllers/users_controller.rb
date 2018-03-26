@@ -10,9 +10,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(username: params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
-    # render post form if current user
-    @micropost = current_user.microposts.build if current_user == @user
+    if @user.nil?
+      redirect_to root_path
+    else  
+      @microposts = @user.microposts.paginate(page: params[:page])
+      # render post form if current user
+      @micropost = current_user.microposts.build if current_user == @user
+    end  
   end 
 
   def new
@@ -24,7 +28,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = "Welcome to the Sample App #{@user.name}!"
-      redirect_to username_path(@user.username)
+      redirect_to user_path(@user.username)
     else
       render 'new'
     end
@@ -38,7 +42,7 @@ class UsersController < ApplicationController
     # @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
-      redirect_to username_path(@user.username)
+      redirect_to user_path(@user.username)
     else
       render 'edit'
     end
@@ -49,6 +53,20 @@ class UsersController < ApplicationController
     flash[:success] = "User deleted"
     redirect_to users_url
   end  
+
+  def following
+    @title = "Following"
+    @user  = User.find_by(username: params[:id])
+    @users = @user.following.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find_by(username: params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
 
   private
 
@@ -61,7 +79,7 @@ class UsersController < ApplicationController
     end
 
     def correct_user
-      @user = User.find(params[:id])
+      @user = User.find_by(username: params[:id])
       redirect_to(root_url) unless @user == current_user
     end     
 end

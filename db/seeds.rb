@@ -13,6 +13,7 @@ User.create!(name:  "Admin User",
              password_confirmation: "foobar",
              admin: true)
 
+# seed users
 49.times do |n|
   name  = "Fake User"
   username = "FakeUser#{n+1}"
@@ -25,8 +26,17 @@ User.create!(name:  "Admin User",
                password_confirmation: password)
 end
 
-users = User.order(:created_at).take(6)
+# Seed posts
+users = User.order(:created_at).take(10)
 50.times do
   content = Faker::Lorem.sentence(5)
   users.each { |user| user.microposts.create!(content: content) }
 end
+
+# Following relationships
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }

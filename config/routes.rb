@@ -5,17 +5,25 @@ Rails.application.routes.draw do
   get  '/about',   to: 'static_pages#about'
   get  '/contact', to: 'static_pages#contact'
 
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+
   get  '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
   # patch '/users/:id/edit', to: 'users#update'
-  get 'users/:username', to: 'users#show', as: :username
+  # get 'users/:username', to: 'users#show', as: :username
 
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
   resources :microposts,          only: [:create, :destroy, :index]
+  resources :relationships,       only: [:create, :destroy]
+
+  
   post '/ppost', to: 'microposts#create_at_profile'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

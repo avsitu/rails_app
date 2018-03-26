@@ -1,0 +1,7 @@
+<li>
+<%= gravatar_for user, 50 %>
+<%= link_to "#{user.name} - #{user.username}", user_path(user.username) %>
+<% if current_user.admin? && current_user != user %>
+  <%= link_to "delete", user, style:"color: red; display: block", method: :delete, data: { confirm: "You sure?" } %>
+<% end %>
+</li>
