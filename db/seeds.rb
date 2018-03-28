@@ -8,16 +8,16 @@
 
 User.create!(name:  "Admin User",
              username: "admin",
-             email: "example@railstutorial.org",
+             email: "admin@mail.com",
              password:              "foobar",
              password_confirmation: "foobar",
              admin: true)
 
 # seed users
 49.times do |n|
-  name  = "Fake User"
-  username = "FakeUser#{n+1}"
-  email = "example-#{n+1}@railstutorial.org"
+  name  = Faker::Name.name
+  username = "faker#{n+1}"
+  email = "user-#{n+1}@mail.com"
   password = "password"
   User.create!(name:  name,
                email: email,

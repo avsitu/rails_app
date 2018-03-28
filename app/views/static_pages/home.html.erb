@@ -28,15 +28,16 @@
   <div>
     <span>This is a demonstration of web development using the 
       <a href="http://rubyonrails.org/">Ruby on Rails</a> framework.</span>
-    <span>This app allows users to:</span>
+    <span>This application currently allows a user to:</span>
     <ul>
-      <li>Set up an account</li>
-      <li>Create short text posts that appear on their profiles</li>
-      <li>Follow other users to receive a feed of their posts</li>
+      <li>Set up and log into an account</li>
+      <li>Create short text posts that appear on their profile</li>
+      <li>Follow other users to receive a chronological feed of their posts</li>
+      <li>"Like" posts by other users to create a collection of favorite posts (WIP) </li>
     </ul>
   </div>
 
-  <div class = "center"><%= link_to "Sign Up for an Account Now!", signup_path, class: "btn btn-lg btn-primary" %></div>
+  <div class = "center"><%= link_to "Sign Up Now!", signup_path, class: "btn btn-lg btn-primary" %></div>
 <% end %>
 
 

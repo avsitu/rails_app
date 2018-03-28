@@ -29,7 +29,9 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   def feed
-    Micropost.where("user_id = ?", id)
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE  follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids})", user_id: id)  
   end
 
   # Follows a user.
@@ -37,7 +39,7 @@ class User < ApplicationRecord
     following << other_user
   end
 
-  # Unfollows a user.
+  # Unfollows a user - deletes relationship entry
   def unfollow(other_user)
     following.delete(other_user)
   end
