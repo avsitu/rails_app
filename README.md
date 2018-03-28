@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby version 2.3.4
 
-Things you may want to cover:
+This is a demonstration of web development using the Ruby on Rails framework. 
+This application currently allows a user to:
+- Set up and log into an account
+- Create short text posts that appear on their profile
+- Follow other users to receive a chronological feed of their posts
+- "Like" posts by other users to create a collection of favorite posts (WIP) 
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+You can check out a production version of the application on Heroku:
+https://still-harbor-86739.herokuapp.com/
