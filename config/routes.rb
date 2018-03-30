@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   resources :microposts,          only: [:create, :destroy, :index]
   resources :relationships,       only: [:create, :destroy]
+  resources :likes,               only: [:create, :destroy]
 
   
   post '/ppost', to: 'microposts#create_at_profile'

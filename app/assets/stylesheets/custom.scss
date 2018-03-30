@@ -210,7 +210,7 @@ input {
   list-style: none;
   padding: 0;
   li {
-    padding: 10px 0;
+    padding: 0;
     border-top: 1px solid #e8e8e8;
   }
   .user {
@@ -225,7 +225,7 @@ input {
       padding: 5px 0;
     }
   }
-  .timestamp {
+  .misc {
     color: gray;
     display: block;
     margin-left: 60px;
@@ -234,6 +234,9 @@ input {
     float: left;
     margin-right: 10px;
     margin-top: 5px;
+  }
+  .likes {
+    display: inline-block;
   }
 }
 

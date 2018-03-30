@@ -12,7 +12,10 @@ class User < ApplicationRecord
 
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-                                                             
+
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :micropost
+  # has_many :post_likes, through: :microposts, source: :likes                                                             
 
   before_save { self.email = email.downcase }
   before_save { self.username = username.downcase }
@@ -34,6 +37,12 @@ class User < ApplicationRecord
     Micropost.where("user_id IN (#{following_ids})", user_id: id)  
   end
 
+  # def liked_posts
+  #   post_ids = "SELECT micropost_id FROM likes
+  #                    WHERE  user_id = #{id}"
+  #   Micropost.where("id IN (#{post_ids})")
+  # end  
+
   # Follows a user.
   def follow(other_user)
     following << other_user
@@ -47,5 +56,9 @@ class User < ApplicationRecord
   # Returns true if the current user is following the other user.
   def following?(other_user)
     following.include?(other_user)
+  end  
+
+  def liked?(post)
+    liked_posts.include?(post)
   end  
 end

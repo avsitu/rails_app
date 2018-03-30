@@ -2,11 +2,22 @@
     <%= link_to gravatar_for(micropost.user, 50), micropost.user %>
     <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
     <span class="content"><%= micropost.content %></span>
-    <span class="timestamp">
-      Posted <%= time_ago_in_words(micropost.created_at) %> ago.
-      <% if current_user == micropost.user %>
-      <%= link_to "Delete", micropost, method: :delete,
-                                       data: { confirm: "You sure?" } %> <% end %>
+    <span class="misc">
+      <span id=<%="likes-#{micropost.id}"%>  class ="likes"> 
+        <%= pluralize(micropost.likes.count, "Like")%> 
+      </span>
+      <span id=<%="like_form-#{micropost.id}" %> class ="likes">
+        <%if current_user.liked?(micropost) %>
+        <%= render 'shared/unlike', micropost: micropost%>
+        <%else%>
+        <%= render 'shared/like', micropost: micropost %>
+        <%end%>
+      </span> 
+
+        | Posted <%= time_ago_in_words(micropost.created_at) %> ago.
+        <% if current_user == micropost.user %>
+        <%= link_to "Delete", micropost, method: :delete,
+                                         data: { confirm: "You sure?" } %> <% end %>
     </span>
 
 </li>
