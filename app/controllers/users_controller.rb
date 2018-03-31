@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :index, :destroy]
+  before_action :logged_in_user, only: [:edit, :update, :index, :destroy, :liked_posts]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user, only: :destroy
 
@@ -27,7 +27,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to the Sample App #{@user.name}!"
+      flash[:success] = "Welcome to the Sample App #{@user.name}!
+        To get started, try composing a post or check out what other users have posted."
       redirect_to user_path(@user.username)
     else
       render 'new'
@@ -67,6 +68,11 @@ class UsersController < ApplicationController
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
   end
+
+  def liked_posts
+    @microposts = current_user.liked_posts.paginate(page: params[:page])
+    render 'liked_posts'
+  end  
 
   private
 
