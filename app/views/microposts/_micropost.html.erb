@@ -1,6 +1,6 @@
 <li id="micropost-<%= micropost.id %>">
-    <%= link_to gravatar_for(micropost.user, 50), micropost.user %>
-    <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+    <%= link_to gravatar_for(micropost.user, 50), user_path(micropost.user.username) %>
+    <span class="user"><%= link_to micropost.user.name, user_path(micropost.user.username) %></span>
     <span class="content"><%= micropost.content %></span>
     <span class="misc">
       <span id=<%="likes-#{micropost.id}"%>  class ="likes"> 

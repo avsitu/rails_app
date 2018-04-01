@@ -15,8 +15,10 @@ class User < ApplicationRecord
 
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: :micropost
-  # has_many :post_likes, through: :microposts, source: :likes                                                             
+  # has_many :post_likes, through: :microposts, source: :likes 
 
+  default_scope -> { order(created_at: :desc) }
+                                                            
   before_save { self.email = email.downcase }
   before_save { self.username = username.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
