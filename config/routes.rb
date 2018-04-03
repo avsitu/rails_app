@@ -9,10 +9,14 @@ Rails.application.routes.draw do
     member do
       get :following, :followers, :liked_posts
     end
+    collection do
+      get :search
+    end 
   end
 
   get  '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
+  # get '/search_user', to: 'users#search'
   # patch '/users/:id/edit', to: 'users#update'
   # get 'users/:username', to: 'users#show', as: :username
 

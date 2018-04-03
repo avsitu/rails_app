@@ -7,7 +7,7 @@ This application currently allows a user to:
 - Set up and log into an account
 - Create short text posts that appear on their profile
 - Follow other users to receive a chronological feed of their posts
-- "Like" posts by other users to create a collection of favorite posts (WIP) 
+- "Like" posts by other users to create a collection of favorite posts
 
 You can check out a production version of the application on Heroku:
 https://still-harbor-86739.herokuapp.com/

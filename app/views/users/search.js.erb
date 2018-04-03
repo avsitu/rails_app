@@ -1,0 +1,2 @@
+$(".users").html("<%= escape_javascript(render @users) %>");
+$(".users_paginate").html("<%= escape_javascript(will_paginate @users) %>");

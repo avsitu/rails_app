@@ -74,6 +74,16 @@ class UsersController < ApplicationController
     render 'liked_posts'
   end  
 
+  def search
+    @users = User.where("name LIKE :query OR username LIKE :query", query: "%#{params[:q]}%")
+    @users = @users.paginate(page: params[:page], per_page: 15)
+    # render 'index'
+    respond_to do |format|
+      format.html { redirect_to users_path }
+      format.js
+    end     
+  end  
+
   private
 
     def user_params

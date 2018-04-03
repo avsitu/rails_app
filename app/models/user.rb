@@ -17,7 +17,7 @@ class User < ApplicationRecord
   has_many :liked_posts, through: :likes, source: :micropost
   # has_many :post_likes, through: :microposts, source: :likes 
 
-  default_scope -> { order(created_at: :desc) }
+  default_scope -> { order(:name) }
                                                             
   before_save { self.email = email.downcase }
   before_save { self.username = username.downcase }
